@@ -1,0 +1,79 @@
+<section id="tasks" class="container mt-5">
+        <!-- Mensagem de quando não há tarefas -->
+        <div class="alert alert-info text-center" role="alert">
+            Não há nenhuma tarefa para ser exibida, tente cadastrar uma.
+        </div>
+
+        <!-- Título da seção -->
+        <h2 class="bg-dark text-white text-center p-2 mb-0">Tarefas</h2>
+
+        <!-- Tabela responsiva com rolagem horizontal -->
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nome da Tarefa</th>
+                        <th>Descrição da Tarefa</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <input type="hidden" id="id_task" value="1">
+                        <td>Exemplo de Tarefa 1</td>
+                        <td>Descrição breve da tarefa 1, com mais detalhes sobre o que precisa ser feito.</td>
+                        <td><span class="badge bg-success">Concluída</span></td>
+                        <td>
+                            <!-- Botões de ação com ícones -->
+                            <button class="btn btn-warning btn-sm mb-4 mb-lg-0" id="edit_task">
+                                <i class="fa-solid fa-pencil"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm mb-4 mb-lg-0">
+                                <i class="fa-solid fa-trash"></i> Excluir
+                            </button>
+                            <button class="btn btn-success btn-sm">
+                                <i class="fa-solid fa-circle"></i> Concluir
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <input type="hidden" id="id_task" value="2">
+                        <td>Exemplo de Tarefa 2</td>
+                        <td>Descrição breve da tarefa 2, com mais detalhes sobre o que precisa ser feito.</td>
+                        <td><span class="badge bg-warning text-dark">Em Andamento</span></td>
+                        <td>
+                            <!-- Botões de ação com ícones -->
+                            <button class="btn btn-warning btn-sm mb-4 mb-lg-0">
+                                <i class="fa-solid fa-pencil"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm mb-4 mb-lg-0">
+                                <i class="fa-solid fa-trash"></i> Excluir
+                            </button>
+                            <button class="btn btn-success btn-sm">
+                                <i class="fa-solid fa-circle"></i> Concluir
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <input type="hidden" id="id_task" value="3">
+                        <td>Exemplo de Tarefa 3</td>
+                        <td>Descrição breve da tarefa 3, com mais detalhes sobre o que precisa ser feito.</td>
+                        <td><span class="badge bg-danger">Pendente</span></td>
+                        <td>
+                            <!-- Botões de ação com ícones -->
+                            <button class="btn btn-warning btn-sm mb-4 mb-lg-0">
+                                <i class="fa-solid fa-pencil"></i> Editar
+                            </button>
+                            <button class="btn btn-danger btn-sm mb-4 mb-lg-0">
+                                <i class="fa-solid fa-trash"></i> Excluir
+                            </button>
+                            <button class="btn btn-success btn-sm">
+                                <i class="fa-solid fa-circle"></i> Concluir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
