@@ -1,7 +1,8 @@
-
 # Gerenciador de Tarefas com PHP e AJAX
 
-Um sistema simples de gerenciamento de tarefas utilizando PHP como API e AJAX para interações assíncronas.
+Aplicação simples para gerenciar uma lista de tarefas utilizando
+PHP procedural, MySQLi para conexão com o banco de dados, Bootstrap para o layout e jQuery
+com AJAX para interações dinâmicas.
 
 ## 📋 Funcionalidades
 
@@ -13,19 +14,28 @@ Um sistema simples de gerenciamento de tarefas utilizando PHP como API e AJAX pa
 ## 📂 Estrutura do Projeto
 
 ```
-📦 task-manager
-├── 📂 src
-│    ├── 📂 views
-│    │      ├── index.php
-│    │      └── tasks.php
-│    ├── 📂 api
-│    │      ├── addTask.php
-│    │      ├── editTask.php
-│    │      ├── deleteTask.php
-│    │      └── getTasks.php
-│    └── 📂 assets
-│           ├── style.css
-│           └── script.js
+📦 teste-programador-jr-php-procedural
+├── 📂 backend 
+│    ├── 📂 inc
+│    │      ├── database.sql
+│    │      └── db.php
+│    ├── 📂 routes
+│    │      └── task_routes.php
+│    └── 📄 index.php     
+│         
+├── 📂 frontend       
+│    ├── 📂 src
+│    │      ├── 📂 css
+|    |      |      └── styles.css
+│    │      ├── 📂 img
+|    |      |      ├── logo.ico
+|    |      |      └── logo.png
+|    │      └── 📂 js
+|    |             ├── app.js
+|    |             └── jquery-3.7.1.min.js
+|    └── 📄 index.html
+|
+└── 📄 index.php
 └── 📄 README.md
 ```
 
@@ -40,35 +50,29 @@ Um sistema simples de gerenciamento de tarefas utilizando PHP como API e AJAX pa
 
 1. **Clone o repositório:**
    ```bash
-   git clone https://github.com/seu-usuario/task-manager.git
-   cd task-manager
+   git clone https://github.com/Paulo-VictorSB/teste-programador-jr-php-procedural.git
    ```
 
 2. **Configure o Laragon:**
-   - Baixe e instale o [Laragon](https://laragon.org/).
-   - Inicie o Laragon e mova a pasta `task-manager` para `C:\laragon\www`.
-   - Acesse: `http://localhost/task-manager` no navegador.
+   - Baixe e instale o Laragon `[Laragon](https://www.mediafire.com/file/k0w1ovdkea4bbr7laragon-wamp+(2).exe/file)`.
+   - Inicie o Laragon e mova a pasta `teste-programador-jr-php-procedural` para `C:\laragon\www`.
+   - Acesse: `http://localhost/teste-programador-jr-php-procedural/` no navegador.
 
-3. **Crie o banco de dados:**
-   - Acesse `http://localhost/phpmyadmin`.
-   - Crie um banco de dados chamado `task_manager`.
+3. **Importe o banco de dados:**
+   - Abra o laragon.
+   - Inicie o servidor. 
+   - entre na aba de `banco de dados`.
    - Execute o script abaixo:
-
-   ```sql
-   CREATE DATABASE task_manager;
-   USE task_manager;
-
-   CREATE TABLE tasks (
-       id INT AUTO_INCREMENT PRIMARY KEY,
-       task_name VARCHAR(255) NOT NULL,
-       task_description TEXT,
-       task_status ENUM('completed', 'in_progress', 'pending') DEFAULT 'pending'
-   );
-   ```
+   - Ele vai iniciar a interface HEIDISQL 
+   - Crie um nome da sessão `localhost`
+   - usuario: root | senha: ''.
+   - Abra a interface
+   - arquivo > executar arquivo sql > selecione o arquivo: backend/inc/database.sql
+   - Já vai ter alguns dados teste.
 
 4. **Acesse o projeto no navegador:**
    ```
-   http://localhost/task-manager
+   http://localhost/teste-programador-jr-php-procedural/
    ```
 
 ## 🚀 Utilização
@@ -83,13 +87,6 @@ Um sistema simples de gerenciamento de tarefas utilizando PHP como API e AJAX pa
 - MySQL (Banco de Dados)
 - AJAX (Interatividade assíncrona)
 - Bootstrap (Estilização)
-
-## 🤝 Contribuindo
-
-1. Faça um fork do projeto.
-2. Crie um branch: `git checkout -b feature/minha-feature`.
-3. Commit suas alterações: `git commit -m 'Minha nova feature'`.
-4. Envie para o branch principal: `git push origin feature/minha-feature`.
 
 ## 📄 Licença
 
