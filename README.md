@@ -54,7 +54,7 @@ com AJAX para interações dinâmicas.
    ```
 
 2. **Configure o Laragon:**
-   - Baixe e instale o Laragon [Laragon](https://www.mediafire.com/file/k0w1ovdkea4bbr7laragon-wamp+(2).exe/file).
+   - Baixe e instale o Laragon [Laragon](https://www.mediafire.com/file/k0w1ovdkea4bbr7/laragon-wamp_%25282%2529.exe/file).
    - Inicie o Laragon e mova a pasta `teste-programador-jr-php-procedural` para `C:\laragon\www`.
    - Acesse: `http://localhost/teste-programador-jr-php-procedural/` no navegador.
 
