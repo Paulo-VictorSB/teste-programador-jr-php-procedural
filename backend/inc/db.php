@@ -15,5 +15,9 @@ $connection = mysqli_connect(
 );
 
 if(!$connection){
-    die("Erro na conexão: " . mysqli_connect_error());
+    echo "
+        Ocorreu um erro durante a conexão com o banco de dados, por favor, verifique as credenciais:
+        " . 
+        mysqli_connect_error();
+    exit();
 }

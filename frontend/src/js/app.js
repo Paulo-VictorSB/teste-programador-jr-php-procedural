@@ -1,3 +1,6 @@
+// Funções
+
+// Renderiza as tarefas.
 function render_tasks(response, tasksSection) {
     const title = $('<h2>', {
         class: 'bg-dark text-white text-center p-2 mb-0',
@@ -35,25 +38,16 @@ function render_tasks(response, tasksSection) {
                 ),
                 $('<td>').append(
                     $('<button>', {
-                        class: 'btn btn-primary btn-sm mb-4 mb-lg-0 me-1 edit_btn',
+                        class: 'edit_btn btn btn-primary btn-sm m-1',
                         html: '<i class="fa-solid fa-pencil"></i> Editar'
                     }),
                     $('<button>', {
-                        class: 'btn btn-danger btn-sm mb-4 mb-lg-0 me-1 delete_task_btn',
+                        class: 'delete_task_btn btn btn-danger btn-sm m-1',
                         html: '<i class="fa-solid fa-trash"></i> Excluir'
                     }),
-                    // Verifica se o status não é 'completed' antes de adicionar o label e o input
-                    e.task_stats !== 'completed' ? $('<label>', {
-                        for: 'complete_task',
-                        class: 'btn btn-success btn-sm mb-4 mb-lg-0 me-1',
+                    e.task_stats !== 'completed' ? $('<button>', {
+                        class: 'complete_btn btn btn-success btn-sm m-1',
                         html: '<i class="fa-solid fa-circle"></i> Concluir'
-                    }) : null,
-                    e.task_stats !== 'completed' ? $('<input>', {
-                        type: 'checkbox',
-                        class: 'btn-check complete_btn',
-                        autocomplete: 'off',
-                        name: 'complete_task',
-                        id: 'complete_task'
                     }) : null
                 )
             );
@@ -64,6 +58,7 @@ function render_tasks(response, tasksSection) {
     tasksSection.append(title, table_responsive.append(table.append(thead.append(thead_tr), tbody)));
 }
 
+// Função assíncrona para listar as tarefas.
 async function task_list() {
     try {
         $('#loading').show();
@@ -96,6 +91,7 @@ async function task_list() {
         }
 }
 
+// Função assíncrona para buscar as tarefas.
 async function search_task(search_input) {
     try {
         $('#loading').show();
@@ -128,6 +124,7 @@ async function search_task(search_input) {
     }
 }
 
+// Função assíncrona para adicionar uma nova tarefa
 async function add_task(task_name, task_stats, task_description) {
     try {
         $('#loading').show();
@@ -152,7 +149,7 @@ async function add_task(task_name, task_stats, task_description) {
             const not_validated = $('<div>', {
                 class: 'alert alert-info text-center my-3',
                 role: 'alert',
-                text: response.errors.join(', ')  // Exibe erros como uma string concatenada
+                text: response.errors.join(', ') 
             });
             task_popup_container.append(not_validated);
         } else if (response.success === true) {
@@ -167,6 +164,7 @@ async function add_task(task_name, task_stats, task_description) {
         }
 }
 
+// Função assícrona para editar uma tarefa já existente
 async function edit_task(task_id, task_name, task_description, task_stats){
     try {
         $('#loading').show();
@@ -192,7 +190,7 @@ async function edit_task(task_id, task_name, task_description, task_stats){
             const not_validated = $('<div>', {
                 class: 'alert alert-info text-center my-3',
                 role: 'alert',
-                text: response.errors.join(', ')  // Exibe erros como uma string concatenada
+                text: response.errors.join(', ') 
             });
             id_task_popup_container.append(not_validated);
         } else if (response.success === true) {
@@ -207,6 +205,7 @@ async function edit_task(task_id, task_name, task_description, task_stats){
         }
 }
 
+// Função assíncrona para deletar uma determinada tarefa
 async function delete_task(task_id){
     try {
         $('#loading').show();
@@ -225,7 +224,7 @@ async function delete_task(task_id){
         $('.alert').hide();
 
         if (response.success === false && response.message === "Método não permitido.") {
-            //
+            alert("Id não encontrado ou Método não permitido")
         } else if (response.success === true) {
             task_list();
         }
@@ -236,6 +235,7 @@ async function delete_task(task_id){
         }
 }
 
+// Função assíncrona para marcar uma tarefa como concluída.
 async function completed_task(task_id, task_name, task_description, task_stats){
     try {
         $('#loading').show();
@@ -260,7 +260,7 @@ async function completed_task(task_id, task_name, task_description, task_stats){
             const not_validated = $('<div>', {
                 class: 'alert alert-info text-center my-3',
                 role: 'alert',
-                text: response.errors.join(', ')  // Exibe erros como uma string concatenada
+                text: response.errors.join(', ')
             });
         } else if (response.success === true) {
             task_list();
@@ -279,17 +279,18 @@ $(document).ready(() => {
     $('#new_task_btn').click(() => {
         $('#add_task_popup, #overlay').fadeIn(250);
     });
-
     $('#close_popup_new_task, #overlay').click(() => {
         $('#task_form')[0].reset();
         $('#add_task_popup, #overlay').fadeOut(250);
     });
 
-    // Listar tarefas
+
+    // Listar tarefas ao clicar no botão
     $('#task_list').click(function () {
         task_list();
     });
 
+    // Buscar
     $('#search_form').on('submit', async (e) => {
         e.preventDefault();  
 
@@ -297,71 +298,72 @@ $(document).ready(() => {
         await search_task(search_input);   
     });
 
+    // Adicionar tarefa
     $('#add_task_button').on('click', async (e) => {
         e.preventDefault();
 
         $('#add_task_popup, #overlay').fadeIn(250);
     
-        // Pega os valores dos campos do formulário
         const task_name = $('[name="add_task_name"]').val();
         const task_stats = $('[name="add_task_stats"]').val();
         const task_description = $('[name="add_task_description"]').val();
     
-        // Chama a função de adicionar tarefa
         await add_task(task_name, task_stats, task_description);
     });
 
-    $(document).on('click', '.edit_btn', async function() {
-        const taskRow = $(this).closest('tr'); // Pega a linha mais próxima do botão de editar
-        const task_id = taskRow.find('#task_id').val(); // ID da tarefa
-        const task_name = taskRow.find('td').eq(0).text(); // Nome da tarefa (primeira coluna)
-        const task_description = taskRow.find('td').eq(1).text(); // Descrição da tarefa (segunda coluna)
-        const task_status = taskRow.find('span').text(); // Status da tarefa (badge)
+    // Buscar dados e adicionar tarefas
+    $(document).on('click', '.edit_btn', async ()=> {
+        const taskRow = $(this).closest('tr'); 
+        const task_id = taskRow.find('#task_id').val(); 
+        const task_name = taskRow.find('td').eq(0).text(); 
+        const task_description = taskRow.find('td').eq(1).text(); 
+        const task_status = taskRow.find('span').text(); 
     
         $('[name="edit_task_id"]').val(task_id);
         $('[name="edit_task_name"]').val(task_name);
         $('[name="edit_task_description"]').val(task_description);
         $('[name="edit_task_status"]').val(task_status);
 
-        // Exibe o popup de edição
         $('#edit_task_popup, #overlay').fadeIn(250);
     });
     
-    $(document).on('submit', '#edit_task_form', async function(e) {
-        e.preventDefault(); // Previne o envio padrão do formulário
+    // Buscar dados e editar tarefa
+    $(document).on('submit', '#edit_task_form', async (e)=> {
+        e.preventDefault(); 
     
-        const task_id = $('[name="edit_task_id"]').val(); // ID da tarefa, adicione este campo oculto no seu formulário
-        const task_name = $('[name="edit_task_name"]').val(); // Nome da tarefa
-        const task_description = $('[name="edit_task_description"]').val(); // Descrição da tarefa
-        const task_stats = $('[name="edit_task_stats"]').val(); // Status da tarefa
+        const task_id = $('[name="edit_task_id"]').val(); 
+        const task_name = $('[name="edit_task_name"]').val();
+        const task_description = $('[name="edit_task_description"]').val(); 
+        const task_stats = $('[name="edit_task_stats"]').val(); 
     
-        // Chama a função async edit_task
         await edit_task(task_id, task_name, task_description, task_stats);
     
-        // Fecha o popup após o envio
         $('#edit_task_popup, #overlay').fadeOut(250);
     });
 
+    // Fechar popup de editar tarefas
     $(document).on('click', '.close_popup_edit_task', function() {
         $('#edit_task_form')[0].reset();
         $('#edit_task_popup, #overlay').fadeOut(250)
     });
 
+    // Busca o id da tarefa e executa a função de deletar tarefas
     $(document).on('click', '.delete_task_btn', async function() {
-        const taskRow = $(this).closest('tr'); // Pega a linha mais próxima do botão de editar
-        const task_id = taskRow.find('#task_id').val(); // ID da tarefa
+        const taskRow = $(this).closest('tr'); 
+        const task_id = taskRow.find('#task_id').val(); 
 
         if(confirm(`Deseja realmente deletar essa tarefa?`)){
             await delete_task(task_id);
         }
     });
 
+    // Busca os dados e reaproveita a função de editar do script.
     $(document).on('click', '.complete_btn', async function() {
-        const taskRow = $(this).closest('tr'); // Pega a linha mais próxima do botão de editar
-        const task_id = taskRow.find('#task_id').val(); // ID da tarefa
-        const task_name = taskRow.find('td').eq(0).text(); // Nome da tarefa (primeira coluna)
-        const task_description = taskRow.find('td').eq(1).text(); // Descrição da tarefa (segunda coluna)
-        const task_stats = 'completed'; // Status da tarefa (badge)
+        const taskRow = $(this).closest('tr');
+        const task_id = taskRow.find('#task_id').val(); 
+        const task_name = taskRow.find('td').eq(0).text(); 
+        const task_description = taskRow.find('td').eq(1).text();
+        const task_stats = 'completed'; 
 
         if(confirm(`Deseja realmente marcar essa tarefa como concluida?`)){
             await completed_task(task_id, task_name, task_description, task_stats);
