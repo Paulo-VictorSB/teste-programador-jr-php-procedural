@@ -77,3 +77,20 @@
             </table>
         </div>
     </section>
+
+
+
+
+
+
+
+
+
+    // Coletando os dados da linha da tarefa
+        const taskRow = $(this).closest('tr'); // Pega a linha mais próxima do botão de editar
+        const task_id = taskRow.find('#id_task').val(); // ID da tarefa
+        const task_name = taskRow.find('td').eq(0).text(); // Nome da tarefa (primeira coluna)
+        const task_description = taskRow.find('td').eq(1).text(); // Descrição da tarefa (segunda coluna)
+        const task_status = taskRow.find('span').text(); // Status da tarefa (badge)
+
+        await edit_task(task_id, task_name, task_description, task_status)
