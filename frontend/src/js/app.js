@@ -38,7 +38,7 @@ function render_tasks(response, tasksSection) {
                         text: statusMap[e.task_stats]?.text || 'Desconhecido'
                     })
                 ),
-                $('<td>').append(
+                $('<td>', { class: 'text-center' }).append(
                     $('<button>', {
                         class: 'edit_btn btn btn-primary btn-sm m-1',
                         html: '<i class="fa-solid fa-pencil"></i> Editar'
