@@ -14,7 +14,7 @@ function render_tasks(response, tasksSection) {
         .append($('<th>', { text: 'Nome da Tarefa' }))
         .append($('<th>', { text: 'Descrição da Tarefa' }))
         .append($('<th>', { text: 'Status' }))
-        .append($('<th>', { text: 'Ações' }));
+        .append($('<th>', { text: 'Ações', class: 'text-center'}));
 
     const tbody = $('<tbody>');
 
@@ -27,8 +27,10 @@ function render_tasks(response, tasksSection) {
     if (Array.isArray(response.tasks)) {
         response.tasks.forEach(e => {
             const tr_tbody = $('<tr>').append(
-                $('<input>', { type: 'hidden', id: 'task_id', value: e.id }),
-                $('<td>', { text: e.task_name }),
+                $('<td>').append(
+                    $('<input>', { type: 'hidden', id: 'task_id', value: e.id }),
+                    e.task_name
+                ),
                 $('<td>', { text: e.task_description }),
                 $('<td>').append(
                     $('<span>', {
@@ -51,7 +53,7 @@ function render_tasks(response, tasksSection) {
                     }) : null
                 )
             );
-            tbody.append(tr_tbody);
+            tbody.append(tr_tbody);            
         });
     }
 
@@ -164,7 +166,7 @@ async function add_task(task_name, task_stats, task_description) {
         }
 }
 
-// Função assícrona para editar uma tarefa já existente
+// Função assíncrona para editar uma tarefa já existente
 async function edit_task(task_id, task_name, task_description, task_stats){
     try {
         $('#loading').show();
@@ -284,14 +286,13 @@ $(document).ready(() => {
         $('#add_task_popup, #overlay').fadeOut(250);
     });
 
-
     // Listar tarefas ao clicar no botão
     $('#task_list').click(function () {
         task_list();
     });
 
     // Buscar
-    $('#search_form').on('submit', async (e) => {
+    $('#search_form').on('submit', async function(e) {
         e.preventDefault();  
 
         const search_input = $('#search_input').val();  
@@ -299,7 +300,7 @@ $(document).ready(() => {
     });
 
     // Adicionar tarefa
-    $('#add_task_button').on('click', async (e) => {
+    $('#add_task_button').on('click', async function(e) {
         e.preventDefault();
 
         $('#add_task_popup, #overlay').fadeIn(250);
@@ -311,24 +312,29 @@ $(document).ready(() => {
         await add_task(task_name, task_stats, task_description);
     });
 
-    // Buscar dados e adicionar tarefas
-    $(document).on('click', '.edit_btn', async ()=> {
-        const taskRow = $(this).closest('tr'); 
+    // Buscar dados da tr e coloca no popup para edição
+    $(document).on('click', '.edit_btn', async function() {
+        // Encontra a linha (tr) mais próxima do botão clicado
+        const taskRow = $(this).closest('tr');
+    
+        // Captura os valores da linha
         const task_id = taskRow.find('#task_id').val(); 
         const task_name = taskRow.find('td').eq(0).text(); 
         const task_description = taskRow.find('td').eq(1).text(); 
         const task_status = taskRow.find('span').text(); 
     
+        // Preenche os campos do popup de edição
         $('[name="edit_task_id"]').val(task_id);
         $('[name="edit_task_name"]').val(task_name);
         $('[name="edit_task_description"]').val(task_description);
         $('[name="edit_task_status"]').val(task_status);
-
+        
+        // Exibe o popup
         $('#edit_task_popup, #overlay').fadeIn(250);
     });
     
     // Buscar dados e editar tarefa
-    $(document).on('submit', '#edit_task_form', async (e)=> {
+    $(document).on('submit', '#edit_task_form', async function(e) {
         e.preventDefault(); 
     
         const task_id = $('[name="edit_task_id"]').val(); 

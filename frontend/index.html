@@ -83,18 +83,18 @@
             <h2 class="mb-4 text-center">Adicionar Tarefa</h2>
             <form id="task_form" method="POST">
                 <div class="mb-3">
-                    <label for="task_name" class="form-label">Nome da Tarefa</label>
+                    <label for="add_task_name" class="form-label">Nome da Tarefa</label>
                     <input type="text" class="form-control" name="add_task_name" id="add_task_name" required minlength="5">
                 </div>
                 <div class="mb-3">
-                    <label for="task_stats" class="form-label">Status</label>
+                    <label for="add_task_stats" class="form-label">Status</label>
                     <select name="add_task_stats" id="add_task_stats" class="form-control">
                         <option value="in_progress">Em andamento</option>
                         <option value="pending">Pendente</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="task_description" class="form-label">Descrição da Tarefa</label>
+                    <label for="add_task_description" class="form-label">Descrição da Tarefa</label>
                     <textarea class="form-control" id="add_task_description" name="add_task_description" rows="3" required minlength="10"
                         style="resize:none"></textarea>
                 </div>
@@ -113,18 +113,18 @@
             <form id="edit_task_form" method="PUT">
                 <input type="hidden" name="edit_task_id" id="edit_task_id">
                 <div class="mb-3">
-                    <label for="task_name" class="form-label">Nome da Tarefa</label>
+                    <label for="edit_task_name" class="form-label">Nome da Tarefa</label>
                     <input type="text" class="form-control" id="edit_task_name" name="edit_task_name" required minlength="5">
                 </div>
                 <div class="mb-3">
-                    <label for="task_stats" class="form-label">Status</label>
+                    <label for="edit_task_stats" class="form-label">Status</label>
                     <select id="edit_task_stats" name="edit_task_stats" class="form-control">
                         <option value="in_progress">Em andamento</option>
                         <option value="pending">Pendente</option>
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label for="task_description" class="form-label">Descrição da Tarefa</label>
+                    <label for="edit_task_description" class="form-label">Descrição da Tarefa</label>
                     <textarea class="form-control" id="edit_task_description" name="edit_task_description" rows="3" required minlength="10"
                         style="resize:none"></textarea>
                 </div>
