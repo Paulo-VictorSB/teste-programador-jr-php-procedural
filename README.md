@@ -62,7 +62,6 @@ com AJAX para interações dinâmicas.
    - Abra o laragon.
    - Inicie o servidor. 
    - entre na aba de `banco de dados`.
-   - Execute o script abaixo:
    - Ele vai iniciar a interface HEIDISQL 
    - Crie um nome da sessão `localhost`
    - usuario: root | senha: ''.
